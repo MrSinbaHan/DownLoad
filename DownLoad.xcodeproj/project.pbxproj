@@ -15,6 +15,7 @@
 		BA998A9B1C06C1F100B51BEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA998A991C06C1F100B51BEC /* LaunchScreen.storyboard */; };
 		BA998AA61C06C1F100B51BEC /* DownLoadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA998AA51C06C1F100B51BEC /* DownLoadTests.m */; };
 		BA998AB11C06C1F100B51BEC /* DownLoadUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA998AB01C06C1F100B51BEC /* DownLoadUITests.m */; };
+		BA998AC01C06C21900B51BEC /* DownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA998ABF1C06C21900B51BEC /* DownLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		BA998AAC1C06C1F100B51BEC /* DownLoadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DownLoadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA998AB01C06C1F100B51BEC /* DownLoadUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownLoadUITests.m; sourceTree = "<group>"; };
 		BA998AB21C06C1F100B51BEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA998ABE1C06C21900B51BEC /* DownLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoader.h; sourceTree = "<group>"; };
+		BA998ABF1C06C21900B51BEC /* DownLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				BA998A8F1C06C1F100B51BEC /* AppDelegate.m */,
 				BA998A911C06C1F100B51BEC /* ViewController.h */,
 				BA998A921C06C1F100B51BEC /* ViewController.m */,
+				BA998ABE1C06C21900B51BEC /* DownLoader.h */,
+				BA998ABF1C06C21900B51BEC /* DownLoader.m */,
 				BA998A941C06C1F100B51BEC /* Main.storyboard */,
 				BA998A971C06C1F100B51BEC /* Assets.xcassets */,
 				BA998A991C06C1F100B51BEC /* LaunchScreen.storyboard */,
@@ -272,6 +277,7 @@
 			files = (
 				BA998A931C06C1F100B51BEC /* ViewController.m in Sources */,
 				BA998A901C06C1F100B51BEC /* AppDelegate.m in Sources */,
+				BA998AC01C06C21900B51BEC /* DownLoader.m in Sources */,
 				BA998A8D1C06C1F100B51BEC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,7 +369,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -401,7 +407,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -414,6 +420,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DownLoad/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = liyan.DownLoad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -425,6 +432,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DownLoad/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = liyan.DownLoad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -498,6 +506,7 @@
 				BA998AB71C06C1F100B51BEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA998AB81C06C1F100B51BEC /* Build configuration list for PBXNativeTarget "DownLoadTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +515,7 @@
 				BA998ABA1C06C1F100B51BEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA998ABB1C06C1F100B51BEC /* Build configuration list for PBXNativeTarget "DownLoadUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +524,7 @@
 				BA998ABD1C06C1F100B51BEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
