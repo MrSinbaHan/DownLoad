@@ -8,8 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #define kRootPath [NSString stringWithFormat:@"%@/Library/workshop", NSHomeDirectory()]
+typedef NS_ENUM(NSInteger, DownloadState) {
+    DownloadTaskStateInit    = 0,  // 任务初始状态 未开始下载
+    DownloadTaskStateWaiting = 1,  // 等待状态
+    DownloadTaskStateRunning = 2,  // 运行状态
+    DownloadTaskStatePause   = 3,  // 暂停状态
+    DownloadTaskStateFinished= 4,  // 结束状态
+    DownloadTaskStateError   = 5,  // 错误状态
+    DownloadTaskStateCancel   = 6,  // 错误状态
+
+};
 
 @interface DownLoader : NSObject
+
+@property (nonatomic, assign)DownloadState state;
 
 @property (nonatomic, readonly)NSURL  *requestUrl;
 /**

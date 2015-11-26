@@ -11,9 +11,11 @@
 #import "NSString+MD5.h"
 @interface DownLoader()<NSURLConnectionDataDelegate,NSURLConnectionDelegate>
 @property (nonatomic, strong)NSURL  *requestUrl;
-@property (nonatomic, strong)NSMutableData *mutableData;
 @property (nonatomic, assign)long long     totalFileLength;
 @property (nonatomic, assign)CGFloat       progress;
+@property (nonatomic, strong)NSFileHandle  *fileHandle;
+@property (nonatomic, assign)long long     currentFileLength;
+@property (nonatomic, strong)NSURLConnection *connection;
 @end
 
 @implementation DownLoader
@@ -33,6 +35,9 @@
     return self;
 
 }
+
+
+
 /**
  *  开始下载
  */
@@ -40,11 +45,48 @@
     if (!self.requestUrl) {
         return;
     }
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:self.requestUrl cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:MAXFLOAT];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:self.requestUrl cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:MAXFLOAT];
+
+    /**
+     *  这里用更新的方法，更新 可以实现读取和写入的功能
+     */
+    self.fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:[kRootPath stringByAppendingPathComponent:[[self.requestUrl absoluteString] MD5String]]];
     
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
+    long long  offset =  [self.fileHandle seekToEndOfFile];
+    
+    NSString *range = [NSString stringWithFormat:@"bytes=%lld-", offset];
+    [request setValue:range forHTTPHeaderField:@"Range"];
+    
+    
+    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [self.connection start];
 }
+/**
+ *  暂停
+ */
+- (void)pauseDownLoad{
+    
+    self.state = DownloadTaskStatePause;
+    [self.connection cancel];
+    self.connection = nil;
+    [self.fileHandle closeFile];
+    self.fileHandle = nil;
+
+}
+/**
+ *  取消  移除本地文件
+ */
+
+- (void)canclDownLoad{
+    self.state = DownloadTaskStateCancel;
+    [self.connection cancel];
+    self.connection = nil;
+    [self.fileHandle closeFile];
+    self.fileHandle = nil;
+    NSError *error;
+    [[NSFileManager defaultManager] removeItemAtPath:[kRootPath stringByAppendingPathComponent:[[self.requestUrl absoluteString] MD5String]] error:&error];
+}
+
 /**
  *  请求失败的回掉
  *
@@ -53,7 +95,8 @@
  */
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 
-
+    
+    self.state = DownloadTaskStateError;
 }
 
 /**
@@ -64,11 +107,15 @@
  */
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     
-    self.mutableData = [NSMutableData data];
+;
+
     /**
      *  获取文件总长度
      */
     self.totalFileLength = response.expectedContentLength;
+    
+    self.state = DownloadTaskStateRunning;
+    
     
 
 
@@ -82,9 +129,15 @@
  */
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 
-    [self.mutableData appendData:data];
-    self.progress = (CGFloat)self.mutableData.length/self.totalFileLength;
+    [self.fileHandle seekToEndOfFile];
     
+    [self.fileHandle writeData:data];
+    
+    
+    self.currentFileLength += data.length;
+    self.progress = (CGFloat)self.currentFileLength/self.totalFileLength;
+    
+    self.state = DownloadTaskStateRunning;
 }
 
 /**
@@ -94,9 +147,12 @@
  */
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 
-    //用url 的地址做一个md5  如果文件类型确定建议添加文件后缀名
-    NSString *file = [kRootPath stringByAppendingPathComponent:[[self.requestUrl absoluteString] MD5String]];
-    // 写到沙盒中
-    [self.mutableData writeToFile:file atomically:YES];
+    self.currentFileLength = 0 ;
+    self.totalFileLength = 0 ; 
+    //下载完成 关闭filehandle
+    [self.fileHandle closeFile];
+    self.fileHandle = nil;
+    
+    self.state = DownloadTaskStateFinished;
 }
 @end
