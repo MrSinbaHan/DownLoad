@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#define kRootPath [NSString stringWithFormat:@"%@/Library/workshop", NSHomeDirectory()]
 
 @interface DownLoader : NSObject
 

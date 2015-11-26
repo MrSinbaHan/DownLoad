@@ -16,6 +16,7 @@
 		BA998AA61C06C1F100B51BEC /* DownLoadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA998AA51C06C1F100B51BEC /* DownLoadTests.m */; };
 		BA998AB11C06C1F100B51BEC /* DownLoadUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA998AB01C06C1F100B51BEC /* DownLoadUITests.m */; };
 		BA998AC01C06C21900B51BEC /* DownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA998ABF1C06C21900B51BEC /* DownLoader.m */; };
+		BAB822A81C06CCAD009EAD80 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB822A71C06CCAD009EAD80 /* NSString+MD5.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		BA998AB21C06C1F100B51BEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA998ABE1C06C21900B51BEC /* DownLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoader.h; sourceTree = "<group>"; };
 		BA998ABF1C06C21900B51BEC /* DownLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoader.m; sourceTree = "<group>"; };
+		BAB822A61C06CCAD009EAD80 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		BAB822A71C06CCAD009EAD80 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				BA998A921C06C1F100B51BEC /* ViewController.m */,
 				BA998ABE1C06C21900B51BEC /* DownLoader.h */,
 				BA998ABF1C06C21900B51BEC /* DownLoader.m */,
+				BAB822A61C06CCAD009EAD80 /* NSString+MD5.h */,
+				BAB822A71C06CCAD009EAD80 /* NSString+MD5.m */,
 				BA998A941C06C1F100B51BEC /* Main.storyboard */,
 				BA998A971C06C1F100B51BEC /* Assets.xcassets */,
 				BA998A991C06C1F100B51BEC /* LaunchScreen.storyboard */,
@@ -277,6 +282,7 @@
 			files = (
 				BA998A931C06C1F100B51BEC /* ViewController.m in Sources */,
 				BA998A901C06C1F100B51BEC /* AppDelegate.m in Sources */,
+				BAB822A81C06CCAD009EAD80 /* NSString+MD5.m in Sources */,
 				BA998AC01C06C21900B51BEC /* DownLoader.m in Sources */,
 				BA998A8D1C06C1F100B51BEC /* main.m in Sources */,
 			);

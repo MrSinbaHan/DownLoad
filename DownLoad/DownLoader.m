@@ -7,8 +7,13 @@
 //
 
 #import "DownLoader.h"
+#import <UIKit/UIKit.h>
+#import "NSString+MD5.h"
 @interface DownLoader()<NSURLConnectionDataDelegate,NSURLConnectionDelegate>
 @property (nonatomic, strong)NSURL  *requestUrl;
+@property (nonatomic, strong)NSMutableData *mutableData;
+@property (nonatomic, assign)long long     totalFileLength;
+@property (nonatomic, assign)CGFloat       progress;
 @end
 
 @implementation DownLoader
@@ -58,6 +63,13 @@
  *  @param response   响应 这里可以获取到文件的总大小
  */
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    
+    self.mutableData = [NSMutableData data];
+    /**
+     *  获取文件总长度
+     */
+    self.totalFileLength = response.expectedContentLength;
+    
 
 
 }
@@ -70,7 +82,9 @@
  */
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 
-
+    [self.mutableData appendData:data];
+    self.progress = (CGFloat)self.mutableData.length/self.totalFileLength;
+    
 }
 
 /**
@@ -80,6 +94,9 @@
  */
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 
-
+    //用url 的地址做一个md5  如果文件类型确定建议添加文件后缀名
+    NSString *file = [kRootPath stringByAppendingPathComponent:[[self.requestUrl absoluteString] MD5String]];
+    // 写到沙盒中
+    [self.mutableData writeToFile:file atomically:YES];
 }
 @end
